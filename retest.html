@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+	<title>JMA | Retest Creator</title>
+	<style type="text/css">
+		#Members_List{
+			display: none;
+		}
+
+		#Enter_Details{
+			display: none;
+		}
+
+		#addCount{
+			display: none;	
+		}
+
+		#computeData{
+			display: none;		
+		}
+
+		body{
+			background-color:#111827;
+		}
+
+		th{
+			background-color:#ffff00;
+			color: black;
+			font-family: "Calibri";
+			font-size: 15px;
+		}
+
+		td{
+			background-color:white;
+			color: black;
+			font-family: "Calibri";
+			font-size: 15px;
+		}
+
+	</style>
+</head>
+<body>
+	<header class="text-gray-400 bg-gray-900 body-font">
+		<div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+			<a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+				<span class="ml-3 text-xl">Jio Media Apps</span>
+			</a>
+			<nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+				<a class="mr-5 hover:text-white" href="retest.html">Retest Generator</a>
+				<a class="mr-5 hover:text-white">Report Generator</a>
+				<a class="mr-5 hover:text-white">RFT Checker</a>
+				<a class="mr-5 hover:text-white" href="about.html">Our Team</a>
+			</nav>
+		</div>
+	</header>
+	<section class="text-gray-400 bg-gray-900 body-font">
+		<div class="container mx-auto flex flex-col px-5 py-24 justify-center items-center">
+			<div class="w-full md:w-2/3 flex flex-col mb-16 items-center text-center">
+				
+				<!--Ask User if any one is absent-->
+				<div id="AskAbsent">
+					<h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Are Members Absent?</h1>
+					<p><input type="radio" id="yes" name="absent" value="yes" onclick="appear()">
+						<label for="yes">Yes</label>&nbsp;
+						<input type="radio" id="no" name="absent" value="no" onclick="disappear()">
+						<label for="no">No</label>
+					</p><br>
+				</div>
+
+				<!--Members list View-->
+				<div id="Members_List">
+					<h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Select Members that are Absent.</h1>
+					<ol id="data">
+						<li>
+							<input type="checkbox" name="Shivali">
+							<label for="Shivali"> Shivali</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Saranmit">
+							<label for="Saranmit"> Saranmit</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Tanmay">
+							<label for="Tanmay"> Tanmay</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Varun">
+							<label for="Varun"> Varun</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Saurabh">
+							<label for="Saurabh"> Saurabh</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Vijay">
+							<label for="Vijay"> Vijay</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Akash">
+							<label for="Akash"> Akash</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Abhishek">
+							<label for="Abhishek"> Abhishek</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Gaurav">
+							<label for="Gaurav"> Gaurav</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Aayush">
+							<label for="Aayush"> Aayush</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Chaitanya">
+							<label for="Chaitanya"> Chaitanya</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Ankita">
+							<label for="Ankita"> Ankita</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Vaibhav">
+							<label for="Vaibhav"> Vaibhav</label><br>
+						</li>	
+						<li>
+							<input type="checkbox" name="Hemant">
+							<label for="Hemant"> Hemant</label><br>
+						</li>
+						<li>
+							<input type="checkbox" name="Pooja">
+							<label for="Pooja"> Pooja</label><br>
+						</li>
+						<br>
+					</ol>
+					<button onclick="computeMembers()" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Done</button>
+				</div>
+
+				<!--Display Absent Members and Total number of members present-->
+				<br>
+				<p id="addCount"></p>
+
+				<!-- Enter the details for computations!-->
+				<div id="Enter_Details">
+					<h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">Enter few details.</h1>
+					<div class="flex w-full justify-center items-end">
+						<div class="relative mr-4 lg:w-full xl:w-1/2 w-2/4 md:w-full text-left">
+							
+							<label for="Sheet_Number" class="leading-7 text-sm text-gray-400">Enter the ending sheet number</label>
+							<input type="text" id="Sheet_Number" name="hero-field" class="w-full bg-gray-800 rounded border bg-opacity-40 border-gray-700 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"><br>
+
+							<label for="Group_Number" class="leading-7 text-sm text-gray-400">Enter the number of groups</label>
+							<input type="text" id="Group_Number" name="hero-field" class="w-full bg-gray-800 rounded border bg-opacity-40 border-gray-700 focus:ring-2 focus:ring-indigo-900 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"><br>
+
+						</div>						
+					</div>
+					<br>
+					<button onclick="computeMembers()" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Submit</button>
+				</div>
+
+				<div class="computeData">
+					<p id="givenData"></p>
+					<br>
+					<table>
+						<!-- here goes our data! -->
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<script type="text/javascript">
+		
+		var member=new Array(
+			"Shivali","Saranmit","Tanmay","Varun",
+			"Saurabh","Vijay","Akash","Abhishek",
+			"Gaurav","Aayush","Chaitanya","Ankita",
+			"Vaibhav","Hemant","Pooja"
+			);
+
+		var membersList=document.getElementById("Members_List");
+		var checkedMembersList=membersList.getElementsByTagName("input");
+
+		function appear() {
+			document.getElementById("Members_List").style.display = 'block';
+			document.getElementById("addCount").style.display = 'none';
+			document.getElementById("Enter_Details").style.display = 'none';
+			document.getElementById("givenData").innerHTML="";
+		}
+
+		function disappear() {
+			document.getElementById("Members_List").style.display = 'none';
+			document.getElementById("addCount").style.display = 'none';
+			if(document.getElementById("no").checked){
+				document.getElementById("Enter_Details").style.display = 'block';
+			}
+			
+			for (var i = 0; i < checkedMembersList.length; i++){
+				checkedMembersList[i].checked=false;
+			}
+			document.getElementById("givenData").innerHTML="";
+		}
+
+		function computeMembers(){
+			var count=0;
+			var absentMembers="";
+			var presentMembers=new Array();
+			for (var i = 0; i < checkedMembersList.length; i++) {
+				if(checkedMembersList[i].checked){
+					absentMembers=absentMembers+checkedMembersList[i].name+",";
+				}
+				else{
+					count++;
+					presentMembers.push(checkedMembersList[i].name);
+				}
+			}
+			//alert(presentMembers);
+			//alert("Total Number Of Present Members: "+count+" \nAbsent Members: "+absentMembers);
+			if(!document.getElementById("no").checked){
+				document.getElementById("addCount").innerHTML="Total Number Of Present Members: "+count+"<br>Absent Members: "+absentMembers;
+				document.getElementById("addCount").style.display = 'block';
+			}
+			document.getElementById("Enter_Details").style.display = 'block';
+
+			//main logic starts from here
+			var startNumber=2;
+			var endNumber=document.getElementById("Sheet_Number").value;
+			var grpNumber=document.getElementById("Group_Number").value;
+
+			var a=startNumber;
+			var b=endNumber;
+
+			var issueGrp=Math.ceil(presentMembers.length/grpNumber);
+			var numberOfIssues=endNumber-1;
+
+			var spanGrp=Math.ceil(numberOfIssues/(issueGrp));	
+			var diff=issueGrp-(numberOfIssues%issueGrp);
+
+			if(!endNumber=="" && !grpNumber==""){
+				document.getElementById("givenData").innerHTML="Start Number: "+startNumber+"<br>Ending Number: "+endNumber+"<br>Total Number Of Groups: "+grpNumber+"<br>Issue Groups: "+issueGrp+"<br>Number of issues:"+numberOfIssues+"<br>"+"Number of issue group that has less retest: "+diff;
+
+				var main_list=new Array();
+
+				if(diff != issueGrp){
+					for(var i=1;i<issueGrp+1;i++){
+						if(i<=issueGrp-diff){
+							main_list.push(a+" to "+(a+spanGrp-1));
+							a+=spanGrp;
+						}else{
+							main_list.push(a+" to "+(a+spanGrp-2));
+							a+=spanGrp-1;
+						}
+					}
+				}
+
+				else{
+					for(var i=1;i<issueGrp+1;i++){
+						main_list.push(a+" to "+(a+spanGrp-1));
+						a+=spanGrp;
+					}
+				}
+
+				//Shuffle here 
+				function shuffle(presentMembers) {
+					var currentIndex = presentMembers.length;
+					var temporaryValue, randomIndex;
+					while (0 !== currentIndex) {
+						randomIndex = Math.floor(Math.random() * currentIndex);
+						currentIndex -= 1;
+						temporaryValue = presentMembers[currentIndex];
+						presentMembers[currentIndex] = presentMembers[randomIndex];
+						presentMembers[randomIndex] = temporaryValue;
+					}
+					return presentMembers;
+				}
+
+				var shuffledMembers =shuffle(presentMembers);
+				console.log(shuffledMembers);
+				console.log(presentMembers);
+
+				var count=0;
+				let table = document.querySelector("table");
+				table.style.width = '100%';
+				table.style.border = '1px solid black';
+				let thead = table.createTHead();
+				let row = thead.insertRow();
+				let th = document.createElement("th");
+				let text = document.createTextNode("Issue No");
+				th.appendChild(text);
+				th.style.border = '1px solid black';
+				row.appendChild(th);
+				row.style.border = '1px solid black';
+				for(var i=0;i<grpNumber;i++){
+					let grp_text="Group "+(i+1);
+					console.log(grp_text);
+
+					th = document.createElement("th");
+					text = document.createTextNode(grp_text);
+					th.appendChild(text);
+					th.style.border = '1px solid black';
+					row.appendChild(th);
+					row.style.border = '1px solid black';
+				}
+				console.log(shuffledMembers);
+
+				for(var i=0;i<issueGrp;i++){
+					let row = table.insertRow();
+					for(var j=0;j<grpNumber;j++){
+						if(j==0){
+							let cell = row.insertCell();
+							let text = document.createTextNode(main_list[i]);
+							cell.appendChild(text);
+							cell.style.border = '1px solid black';
+						}
+
+						cell = row.insertCell();
+						text = document.createTextNode(shuffledMembers[count]);
+						cell.appendChild(text);
+						cell.style.border = '1px solid black';
+						count+=1;
+					}
+				}
+
+			}
+
+		}
+
+	</script>
+</body>
+</html>
